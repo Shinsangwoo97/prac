@@ -5,6 +5,7 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://test:sparta@cluster0.gbr1o.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db = client.dbsparta
 # 이거 몽고데이터베이스 본인껄로 바꿔주세요!
+
 @app.route('/')
 def home():
    return render_template('index.html')
@@ -36,13 +37,14 @@ def star_post():
 def star_get():
     star_list = list(db.stars.find({}, {'_id':False}))
     return jsonify({'mystars':star_list})
-#
-# @app.route("/vote", methods=["POST"])
-# def bucket_done():
-#     num_receive = request.form['num_give']
-#     db.bucket.update_one({'num': int(num_receive)}, {'$set': {'vote': +1}})
-#
-#     return jsonify({'msg': '완료!'})
-# 아직 미완성이에요
+
+@app.route("/star/vote", methods=["POST"])
+def vote_star():
+    num_receive = request.form['num_give']
+
+    db.stars.update_one({'num': int(num_receive)}, {'$inc': {'vote': 1}})
+
+    return jsonify({'msg': '완료!'})
+
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5000, debug=True)
