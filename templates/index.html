@@ -23,31 +23,7 @@
             font-family: 'Jua', sans-serif;
         }
 
-        .mytitle {
-
-            color: white;
-
-            text-align: center;
-
-            width: 300px;
-            height: 200px;
-
-            background-image: url("https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg");
-            background-size: cover;
-            background-position: center;
-
-            border-radius: 10px;
-
-            padding-top: 40px;
-
-            margin-top: 30px;
-            margin-bottom: 30px;
-
-        }
-
-        .mytitle2 {
-            background-color: green;
-
+        .title {
             width: 100%;
 
             height: 250px;
@@ -65,7 +41,7 @@
 
         }
 
-        .mytitle2 > button {
+        .title > button {
             width: 300px;
             height: 50px;
 
@@ -78,21 +54,8 @@
             margin-top: 10px;
         }
 
-        .mytitle2 > button:hover {
+        .title > button:hover {
             border: 2px solid white;
-        }
-
-        .wrap {
-
-            width: 300px;
-
-            margin: auto;
-
-
-        }
-
-        .wrap2 {
-            display: none;
         }
 
         .mypost {
@@ -108,15 +71,13 @@
         .mycards {
             margin-top: 40px;
         }
+
+        .menu {
+            padding: 20px;
+        }
     </style>
 
     <script>
-
-        function hey() {
-            $('#wrap').hide()
-            $('#wrap2').show()
-        }
-
         $(document).ready(function () {
             show_star();
             star_rank();
@@ -186,6 +147,23 @@
             });
         }
 
+/* 투표수 미완성
+        function star_rank() {
+            $.ajax({
+                type: 'GET',
+                url: '/star/rank',
+                data: {},
+                success: function (response) {
+                    let rows = response['votes']
+                    for (let i = 0; i < rows.length; i++) {
+                        let vote = rows[i]['vote']
+                        console.log($(vote))
+
+                    }
+                }
+            })
+        }*/
+
         function open_box() {
             $('#mypost').show()
         }
@@ -196,27 +174,16 @@
     </script>
 </head>
 <body>
-
-    <div class="wrap" id="wrap">
-
-        <div class="mytitle">
-            <h1>로그인 페이지</h1>
-            <h5>아이디 비밀번호를 입력해주세요</h5>
-        </div>
-
-        <p>ID: <input type="text"/></p>
-        <p>PW: <input type="text"/></p>
-        <button onclick="hey()" class="btn btn-dark">로그인 하기</button>
-
-    </div>
-
-
     <div id="wrap2" class="wrap2">
-
-
         <div class="mytitle2">
-            <h1>좋아하는 연예인에게 투표하세요♥♥♥</h1>
-            <button onclick="open_box()">응원하고 싶은 연예인 추가하기</button>
+            <div class="menu">
+                <a class="btn btn-secondary" href="/login"  role="button">로그인</a>
+                <a class="btn btn-secondary" href="#" role="button">투표 순위</a>
+            </div>
+            <div class="title">
+                <h1>좋아하는 연예인에게 투표하세요♥♥♥</h1>
+                <button onclick="open_box()">응원하고 싶은 연예인 추가하기</button>
+            </div>
         </div>
 
         <div id="mypost" class="mypost">
@@ -247,7 +214,7 @@
 
         <div class="mycards">
             <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-                <div class="col">
+                <!--<div class="col">
                     <div class="card h-100">
                         <img src="https://img.etoday.co.kr/pto_db/2021/05/600/20210516141119_1620833_646_969.jpg"
                              class="card-img-top">
@@ -306,7 +273,7 @@
                             <button type="button" class="btn btn-dark">투표하기</button>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 

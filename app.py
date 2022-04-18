@@ -10,6 +10,10 @@ db = client.dbsparta
 def home():
    return render_template('index.html')
 
+@app.route('/login')
+def login():
+   return render_template('login.html')
+
 @app.route("/star", methods=["POST"])
 def star_post():
     star_name_receive = request.form['star_name_give']
@@ -45,6 +49,12 @@ def vote_star():
     db.stars.update_one({'num': int(num_receive)}, {'$inc': {'vote': 1}})
 
     return jsonify({'msg': '완료!'})
+
+# 투표수 미완성
+# @app.route("/star/rank", methods=["GET"])
+# def star_rank():
+#     star_list = list(db.stars.find({}, {'_id':False}))
+#     return jsonify({'votes':star_list})
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5000, debug=True)
